@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:form_app/widgets/error_text.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -82,7 +83,7 @@ Language: $language'''),
               TextField(
                 controller: nameController,
 
-                decoration: const InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name', ),
               ),
               const SizedBox(height: 12),
 
@@ -121,14 +122,14 @@ Language: $language'''),
               FormField<bool>(
                 initialValue: false,
                 validator: (value) {
-                  return value == true ? null : 'Agree to the terms';
+                  return value == true ? null : 'Must agree to the terms';
                 },
                 builder: (field) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CheckboxListTile(
-                        title: const Text('I agree to the terms'),
+                        title: const Text('I agree to the perfect terms'),
                         value: isAccepted,
                         onChanged: (value) {
                           setState(() {
@@ -139,13 +140,7 @@ Language: $language'''),
                         },
                       ),
                       if (field.hasError)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16.0),
-                          child: Text(
-                            field.errorText!,
-                            style: const TextStyle(color: Colors.red),
-                          ),
-                        ),
+                        ErrorText(error: field.errorText!, paddingLeft: 16),
                     ],
                   );
                 },
@@ -186,13 +181,7 @@ Language: $language'''),
                         },
                       ),
                       if (field.hasError)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16.0),
-                          child: Text(
-                            field.errorText!,
-                            style: const TextStyle(color: Colors.red),
-                          ),
-                        ),
+                        ErrorText(error: field.errorText!, paddingLeft: 16),
                     ],
                   );
                 },
@@ -201,7 +190,7 @@ Language: $language'''),
 
               // 7. Switch - Notifications
               SwitchListTile(
-                title: const Text('Notifications'),
+                title: const Text('Turn on notifications'),
                 value: notifications,
                 onChanged: (value) {
                   setState(() {
@@ -234,11 +223,7 @@ Language: $language'''),
                           field.didChange(value);
                         },
                       ),
-                      if (field.hasError)
-                        Text(
-                          field.errorText!,
-                          style: const TextStyle(color: Colors.red),
-                        ),
+                      if (field.hasError) ErrorText(error: field.errorText!),
                     ],
                   );
                 },
@@ -272,11 +257,7 @@ Language: $language'''),
                           field.didChange(value);
                         },
                       ),
-                      if (field.hasError)
-                        Text(
-                          field.errorText!,
-                          style: const TextStyle(color: Colors.red),
-                        ),
+                      if (field.hasError) ErrorText(error: field.errorText!),
                     ],
                   );
                 },
@@ -310,11 +291,7 @@ Language: $language'''),
                           field.didChange(value);
                         },
                       ),
-                      if (field.hasError)
-                        Text(
-                          field.errorText!,
-                          style: const TextStyle(color: Colors.red),
-                        ),
+                      if (field.hasError) ErrorText(error: field.errorText!),
                     ],
                   );
                 },
@@ -369,13 +346,7 @@ Language: $language'''),
                         },
                       ),
                       if (field.hasError)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: Text(
-                            field.errorText!,
-                            style: const TextStyle(color: Colors.red),
-                          ),
-                        ),
+                        ErrorText(error: field.errorText!, paddingLeft: 16),
                     ],
                   );
                 },
