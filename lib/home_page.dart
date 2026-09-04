@@ -25,12 +25,7 @@ class _HomePageState extends State<HomePage> {
   String? city;
   String? language;
 
-  final cities = [
-    'Sana\'a',
-    'Aden',
-    'Taiz',
-    'Ibb',
-  ];
+  final cities = ['Sana\'a', 'Aden', 'Taiz', 'Ibb'];
 
   @override
   void dispose() {
@@ -46,9 +41,8 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Entered Information'),
-          content: Text(
-            '''
+          title: const Text('Your Information'),
+          content: Text('''
 Name: ${nameController.text}
 Email: ${emailController.text}
 Phone: ${phoneController.text}
@@ -59,9 +53,7 @@ Notifications: $notifications
 Experience: $experience
 Age: ${ageRange.start.round()} - ${ageRange.end.round()}
 City: $city
-Language: $language
-            ''',
-          ),
+Language: $language'''),
           actions: [
             TextButton(
               onPressed: () {
@@ -78,9 +70,7 @@ Language: $language
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Form Homework'),
-      ),
+      appBar: AppBar(title: const Text('Register Form')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -91,19 +81,15 @@ Language: $language
               // 1. TextField - Name
               TextField(
                 controller: nameController,
-                
-                decoration: const InputDecoration(
-                  labelText: 'Name',
-                ),
+
+                decoration: const InputDecoration(labelText: 'Name'),
               ),
               const SizedBox(height: 12),
 
               // 2. TextFormField - Email
               TextFormField(
                 controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                ),
+                decoration: const InputDecoration(labelText: 'Email'),
                 validator: (value) {
                   return value!.contains('@') ? null : 'Invalid email';
                 },
@@ -114,9 +100,7 @@ Language: $language
               TextFormField(
                 controller: phoneController,
                 keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  labelText: 'Phone Number',
-                ),
+                decoration: const InputDecoration(labelText: 'Phone Number'),
                 validator: (value) {
                   return value!.length == 10 ? null : 'Invalid phone number';
                 },
@@ -126,9 +110,7 @@ Language: $language
               // 4. TextFormField - Required Field
               TextFormField(
                 controller: requiredController,
-                decoration: const InputDecoration(
-                  labelText: 'Required Field',
-                ),
+                decoration: const InputDecoration(labelText: 'Required Field'),
                 validator: (value) {
                   return value!.isEmpty ? 'Required' : null;
                 },
@@ -161,9 +143,7 @@ Language: $language
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
                             field.errorText!,
-                            style: const TextStyle(
-                              color: Colors.red,
-                            ),
+                            style: const TextStyle(color: Colors.red),
                           ),
                         ),
                     ],
@@ -210,9 +190,7 @@ Language: $language
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
                             field.errorText!,
-                            style: const TextStyle(
-                              color: Colors.red,
-                            ),
+                            style: const TextStyle(color: Colors.red),
                           ),
                         ),
                     ],
@@ -243,9 +221,7 @@ Language: $language
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Experience: ${experience.toStringAsFixed(1)}',
-                      ),
+                      Text('Experience: ${experience.toStringAsFixed(1)}'),
                       Slider(
                         min: 0,
                         max: 10,
@@ -261,9 +237,7 @@ Language: $language
                       if (field.hasError)
                         Text(
                           field.errorText!,
-                          style: const TextStyle(
-                            color: Colors.red,
-                          ),
+                          style: const TextStyle(color: Colors.red),
                         ),
                     ],
                   );
@@ -301,9 +275,7 @@ Language: $language
                       if (field.hasError)
                         Text(
                           field.errorText!,
-                          style: const TextStyle(
-                            color: Colors.red,
-                          ),
+                          style: const TextStyle(color: Colors.red),
                         ),
                     ],
                   );
@@ -341,9 +313,7 @@ Language: $language
                       if (field.hasError)
                         Text(
                           field.errorText!,
-                          style: const TextStyle(
-                            color: Colors.red,
-                          ),
+                          style: const TextStyle(color: Colors.red),
                         ),
                     ],
                   );
@@ -363,7 +333,9 @@ Language: $language
                       PopupMenuButton<String>(
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 8.0),
+                            vertical: 12.0,
+                            horizontal: 8.0,
+                          ),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(4.0),
@@ -401,9 +373,7 @@ Language: $language
                           padding: const EdgeInsets.only(top: 4.0),
                           child: Text(
                             field.errorText!,
-                            style: const TextStyle(
-                              color: Colors.red,
-                            ),
+                            style: const TextStyle(color: Colors.red),
                           ),
                         ),
                     ],
@@ -413,40 +383,49 @@ Language: $language
               const SizedBox(height: 24),
 
               // Submit Button
-              ElevatedButton(
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    showSummary();
-                  }
-                },
-                child: const Text('Submit'),
-              ),
-              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: FilledButton(
+                      onPressed: () {
+                        // if (formKey.currentState!.validate()) {
+                        showSummary();
+                        // }
+                      },
+                      child: const Text('Submit'),
+                    ),
+                  ),
+                  // Reset Button
+                  Expanded(
+                    flex: 1,
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          nameController.clear();
+                          emailController.clear();
+                          phoneController.clear();
+                          requiredController.clear();
 
-              // Reset Button
-              TextButton(
-                onPressed: () {
-                  setState(() {
-                    nameController.clear();
-                    emailController.clear();
-                    phoneController.clear();
-                    requiredController.clear();
+                          isAccepted = false;
+                          gender = null;
+                          notifications = false;
 
-                    isAccepted = false;
-                    gender = null;
-                    notifications = false;
+                          experience = 5;
 
-                    experience = 5;
+                          ageRange = const RangeValues(18, 30);
 
-                    ageRange = const RangeValues(18, 30);
+                          city = null;
+                          language = null;
+                        });
 
-                    city = null;
-                    language = null;
-                  });
-
-                  formKey.currentState!.reset();
-                },
-                child: const Text('Reset'),
+                        formKey.currentState!.reset();
+                      },
+                      child: const Text('Reset'),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
