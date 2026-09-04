@@ -390,9 +390,9 @@ Language: $language'''),
                     flex: 2,
                     child: FilledButton(
                       onPressed: () {
-                        // if (formKey.currentState!.validate()) {
-                        showSummary();
-                        // }
+                        if (formKey.currentState!.validate()) {
+                          showSummary();
+                        }
                       },
                       child: const Text('Submit'),
                     ),
